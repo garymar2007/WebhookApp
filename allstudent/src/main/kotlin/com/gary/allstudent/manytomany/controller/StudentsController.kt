@@ -1,10 +1,10 @@
-package com.gary.allstudent.controller
+package com.gary.allstudent.manytomany.controller
 
-import com.gary.allstudent.model.EnrollInCourse
-import com.gary.allstudent.model.ViewStudent
-import com.gary.allstudent.model.toView
-import com.gary.allstudent.repository.CourseRepository
-import com.gary.allstudent.repository.StudentRepository
+import com.gary.allstudent.manytomany.model.EnrollInCourse
+import com.gary.allstudent.manytomany.model.ViewStudent
+import com.gary.allstudent.manytomany.model.toView
+import com.gary.allstudent.manytomany.repository.CourseRepository
+import com.gary.allstudent.manytomany.repository.StudentRepository
 import org.springframework.web.bind.annotation.*
 
 @RestController

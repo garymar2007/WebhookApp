@@ -1,4 +1,4 @@
-package com.gary.allstudent.model
+package com.gary.allstudent.manytomany.model
 
 data class ViewStudent(
     val id: Long,

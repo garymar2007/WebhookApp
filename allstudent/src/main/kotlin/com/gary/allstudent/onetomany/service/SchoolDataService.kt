@@ -1,7 +1,7 @@
-package com.gary.allstudent.service
+package com.gary.allstudent.onetomany.service
 
-import com.gary.allstudent.model.SchoolData
-import com.gary.allstudent.repository.SchoolDataRepository
+import com.gary.allstudent.onetomany.model.SchoolData
+import com.gary.allstudent.onetomany.repository.SchoolDataRepository
 import org.springframework.stereotype.Service
 
 @Service

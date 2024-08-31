@@ -1,4 +1,4 @@
-package com.gary.allstudent.model
+package com.gary.allstudent.onetomany.model
 
 data class ViewSchoolData(
     val id: Int,
@@ -8,5 +8,6 @@ data class ViewSchoolData(
     val email: String,
     val website: String,
     val logo: String,
-    val webhookdetailId: List<Int>
+    val webhookdetailId: List<Int>,
+    val pupilId: List<Int>
 )

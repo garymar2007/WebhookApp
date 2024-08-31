@@ -1,4 +1,4 @@
-package com.gary.allstudent.model
+package com.gary.allstudent.onetomany.model
 
 import jakarta.persistence.*
 

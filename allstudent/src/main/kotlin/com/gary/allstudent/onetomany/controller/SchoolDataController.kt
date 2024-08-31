@@ -1,7 +1,7 @@
-package com.gary.allstudent.controller
+package com.gary.allstudent.onetomany.controller
 
-import com.gary.allstudent.model.*
-import com.gary.allstudent.service.SchoolDataService
+import com.gary.allstudent.onetomany.model.*
+import com.gary.allstudent.onetomany.service.SchoolDataService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -41,6 +41,28 @@ class SchoolDataController(
 
         return ResponseEntity.ok("Webhook added")
     }
+
+    @PostMapping("/addStudent/{schoolId}")
+    fun addStudentToSchool(
+        @PathVariable schoolId: Int,
+        @RequestBody pupil: Pupil
+    ): ResponseEntity<String> {
+        val schoolData = schoolDataService.findById(schoolId)
+            ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid school Id!")
+
+        val pupilToBeSaved = Pupil(
+            name = pupil.name,
+            age = pupil.age,
+            schoolData = schoolData
+        )
+
+        schoolDataService.save(
+            schoolData.copy(pupils = listOf(pupilToBeSaved))
+        )
+        //TODO: send data as webhook
+        return ResponseEntity.ok("Student added")
+    }
+
 
     @GetMapping("/getSchoolData/{schoolId}")
     fun findSchoolDataById(@PathVariable schoolId: Int): ResponseEntity<ViewSchoolData> {
