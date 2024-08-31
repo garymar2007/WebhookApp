@@ -1,7 +1,6 @@
 package com.gary.allstudent.controller
 
-import com.gary.allstudent.model.SchoolData
-import com.gary.allstudent.model.WebhookDetails
+import com.gary.allstudent.model.*
 import com.gary.allstudent.service.SchoolDataService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -44,16 +43,16 @@ class SchoolDataController(
     }
 
     @GetMapping("/getSchoolData/{schoolId}")
-    fun findSchoolDataById(@PathVariable schoolId: Int): ResponseEntity<SchoolData> {
+    fun findSchoolDataById(@PathVariable schoolId: Int): ResponseEntity<ViewSchoolData> {
         val schoolData = schoolDataService.findById(schoolId)
             ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid school Id!")
-        return ResponseEntity.ok(schoolData)
+        return ResponseEntity.ok(schoolData.toView())
     }
 
     @GetMapping("/getWebhookEvents/{schoolId}")
-    fun findAllWebhookEvents(@PathVariable schoolId: Int): ResponseEntity<List<WebhookDetails>> {
+    fun findAllWebhookEvents(@PathVariable schoolId: Int): ResponseEntity<List<ViewWebEvent>> {
         val schoolData = schoolDataService.findById(schoolId)
             ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid school Id!")
-        return ResponseEntity.ok(schoolData.webhookDetails)
+        return ResponseEntity.ok(schoolData.webhookDetails.map { it.toView() })
     }
 }

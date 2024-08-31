@@ -18,7 +18,9 @@ data class SchoolData(
     @OneToMany(mappedBy = "schoolData", cascade = [CascadeType.ALL])
     val webhookDetails: List<WebhookDetails> = listOf()
 ) {
-//    @JsonBackReference(value = "webhookDetails")
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "schoolData", cascade = [CascadeType.ALL])
-//    var webhookDetails: List<WebhookDetails>? = mutableListOf()
 }
+
+fun SchoolData.toView() =
+    ViewSchoolData(id ?: 0, schoolName, address, phone,
+        email, website, logo, webhookDetails.map { it.id ?: 0 })
+

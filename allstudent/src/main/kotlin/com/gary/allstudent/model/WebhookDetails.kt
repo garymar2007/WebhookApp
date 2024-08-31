@@ -14,3 +14,6 @@ data class WebhookDetails(
     @JoinColumn(name = "schoolData_id")
     var schoolData: SchoolData? = null
 )
+
+fun WebhookDetails.toView() =
+    ViewWebEvent(id ?: 0, eventType, endPointUrl, schoolData?.id ?: 0)
