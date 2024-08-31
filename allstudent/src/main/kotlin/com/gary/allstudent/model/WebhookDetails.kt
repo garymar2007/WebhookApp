@@ -10,9 +10,9 @@ data class WebhookDetails(
     val id: Int? = null,
     val eventType: EventType,
     val endPointUrl: String,
-    @ManyToOne(cascade = [CascadeType.ALL])
-    @JoinColumn(name = "school_id")
-    val schoolData: SchoolData? = null
+    @ManyToOne(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+    @JoinColumn(name = "schoolData_id", nullable = true)
+    var schoolData: SchoolData? = null
 )
 
 enum class EventType {

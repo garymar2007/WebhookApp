@@ -1,5 +1,6 @@
 package com.gary.allstudent.model
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import jakarta.persistence.*
 
 @Entity
@@ -13,7 +14,9 @@ data class SchoolData(
     val phone: String,
     val email: String,
     val website: String,
-    val logo: String,
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "schoolData", cascade = [CascadeType.ALL])
-    var webhookDetails: List<WebhookDetails>? = null
-)
+    val logo: String
+) {
+    @JsonBackReference(value = "webhookDetails")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "schoolData", cascade = [CascadeType.ALL])
+    var webhookDetails: List<WebhookDetails>? = mutableListOf()
+}

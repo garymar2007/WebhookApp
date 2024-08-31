@@ -33,8 +33,8 @@ class SchoolDataController(
         val details = WebhookDetails(
             eventType = webhookDetails.eventType,
             endPointUrl = webhookDetails.endPointUrl,
-            schoolData = schoolData
         )
+        details.schoolData = schoolData
         val webhooks: List<WebhookDetails> = listOf(details)
         schoolData.webhookDetails = webhooks
         schoolDataService.save(schoolData)
