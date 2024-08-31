@@ -14,9 +14,11 @@ data class SchoolData(
     val phone: String,
     val email: String,
     val website: String,
-    val logo: String
+    val logo: String,
+    @OneToMany(mappedBy = "schoolData", cascade = [CascadeType.ALL])
+    val webhookDetails: List<WebhookDetails> = listOf()
 ) {
-    @JsonBackReference(value = "webhookDetails")
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "schoolData", cascade = [CascadeType.ALL])
-    var webhookDetails: List<WebhookDetails>? = mutableListOf()
+//    @JsonBackReference(value = "webhookDetails")
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "schoolData", cascade = [CascadeType.ALL])
+//    var webhookDetails: List<WebhookDetails>? = mutableListOf()
 }

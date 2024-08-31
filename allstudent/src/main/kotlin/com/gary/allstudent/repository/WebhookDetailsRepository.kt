@@ -1,7 +1,7 @@
 package com.gary.allstudent.repository
 
 import com.gary.allstudent.model.WebhookDetails
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.jpa.repository.JpaRepository
 
-interface WebhookDetailsRepository : CrudRepository<WebhookDetails, Int> {
+interface WebhookDetailsRepository : JpaRepository<WebhookDetails, Int> {
 }

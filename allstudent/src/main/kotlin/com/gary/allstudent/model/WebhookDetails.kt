@@ -8,15 +8,9 @@ data class WebhookDetails(
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="ID")
     val id: Int? = null,
-    val eventType: EventType,
+    val eventType: String,
     val endPointUrl: String,
-    @ManyToOne(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
-    @JoinColumn(name = "schoolData_id", nullable = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "schoolData_id")
     var schoolData: SchoolData? = null
 )
-
-enum class EventType {
-    STUDENT_ADD,
-    STUDENT_DELETE,
-    STUDENT_UPDATE
-}
