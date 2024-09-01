@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.client.RestTemplate
+import org.springframework.web.client.getForObject
 import org.springframework.web.server.ResponseStatusException
 
 @RestController
@@ -59,7 +61,17 @@ class SchoolDataController(
         schoolDataService.save(
             schoolData.copy(pupils = listOf(pupilToBeSaved))
         )
-        //TODO: send data as webhook
+        //send data as webhook
+        schoolData.webhookDetails
+            .stream()
+            .filter { it.eventType == "STUDENT_ADD" }
+            .findFirst().orElse(null)
+            ?.let {
+                //Send data to webhook endpoint via RestTemplate
+                val url = it.endPointUrl + "/${pupil.name}"
+                val result: String?  = RestTemplate().getForObject(url, pupil, String::class)
+                println("Sending data to ${it.endPointUrl} and result is $result")
+            }
         return ResponseEntity.ok("Student added")
     }
 
